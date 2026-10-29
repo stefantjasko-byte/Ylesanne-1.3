@@ -1,0 +1,247 @@
+
+from datetime import date
+import calendar
+import math
+
+# ==========================================
+# ÜLESANNE 1 – KUUPÄEV JA VANUS
+# ==========================================
+
+print("\n--- ÜLESANNE 1: KUUPÄEV JA VANUS ---")
+
+tana = date.today()
+
+print("Tere!")
+print("Tänane kuupäev:", tana)
+print("Kuupäev kujul 27/12/2022:", tana.strftime("%d/%m/%Y"))
+print("Kuupäev kujul December 27, 2022:", tana.strftime("%B %d, %Y"))
+print("Kuupäev kujul 12/27/22:", tana.strftime("%m/%d/%y"))
+print("Kuupäev kujul Dec-27-2022:", tana.strftime("%b-%d-%Y"))
+
+print("Päev:", tana.day)
+print("Kuu:", tana.month)
+print("Aasta:", tana.year)
+
+kuu_paevad = calendar.monthrange(tana.year, tana.month)[1]
+print("Päevi kuu lõpuni:", kuu_paevad - tana.day)
+
+aasta_lopp = date(tana.year, 12, 31)
+print("Päevi aasta lõpuni:", (aasta_lopp - tana).days)
+
+try:
+    synni_paev = int(input("Sisesta sünnipäeva päev: "))
+    synni_kuu = int(input("Sisesta sünnikuu: "))
+    synni_aasta = int(input("Sisesta sünniaasta: "))
+
+    synni = date(synni_aasta, synni_kuu, synni_paev)
+
+    if synni > tana:
+        print("Sünnikuupäev ei saa olla tulevikus.")
+    else:
+        aastad = tana.year - synni.year
+        kuud = tana.month - synni.month
+        paevad = tana.day - synni.day
+
+        if paevad < 0:
+            kuud -= 1
+            eelmine_kuu = tana.month - 1
+            eelmine_aasta = tana.year
+
+            if eelmine_kuu == 0:
+                eelmine_kuu = 12
+                eelmine_aasta -= 1
+
+            paevad += calendar.monthrange(
+                eelmine_aasta, eelmine_kuu
+            )[1]
+
+        if kuud < 0:
+            aastad -= 1
+            kuud += 12
+
+        print("Vanus:", aastad, "aastat,", kuud,
+              "kuud ja", paevad, "päeva.")
+
+except ValueError:
+    print("Vigane sünnikuupäev!")
+
+
+# ==========================================
+# ÜLESANNE 2 – TEHTED JA SULUD
+# ==========================================
+
+print("\n--- ÜLESANNE 2: TEHTED JA SULUD ---")
+
+print("3 + 8 / (4 - 2) * 4 =", 3 + 8 / (4 - 2) * 4)
+print("3 + 8 / 4 - 2 * 4 =", 3 + 8 / 4 - 2 * 4)
+print("(3 + 8) / (4 - 2) * 4 =", (3 + 8) / (4 - 2) * 4)
+print("3 + (8 / (4 - 2)) * 4 =", 3 + (8 / (4 - 2)) * 4)
+
+print("Sulud määravad, millised tehted arvutatakse kõigepealt.")
+print("Korrutamine ja jagamine tehakse enne liitmist ja lahutamist.")
+
+
+# ==========================================
+# ÜLESANNE 3 – RUUT JA RING
+# ==========================================
+
+print("\n--- ÜLESANNE 3: RUUT JA RING ---")
+
+try:
+    R = float(input("Sisesta ringi raadius: "))
+
+    if R > 0:
+        ruudu_kulg = 2 * R
+        ruudu_pindala = ruudu_kulg ** 2
+        ruudu_umbermoot = 4 * ruudu_kulg
+        ringi_pindala = math.pi * R ** 2
+        ringi_umbermoot = 2 * math.pi * R
+
+        print("Ruudu pindala:", round(ruudu_pindala, 2))
+        print("Ruudu ümbermõõt:", round(ruudu_umbermoot, 2))
+        print("Ringi pindala:", round(ringi_pindala, 2))
+        print("Ringi ümbermõõt:", round(ringi_umbermoot, 2))
+    else:
+        print("Raadius peab olema positiivne.")
+
+except ValueError:
+    print("Palun sisesta arv.")
+
+
+# ==========================================
+# ÜLESANNE 4 – MAA ÜMBERMÕÕT MÜNTIDES
+# ==========================================
+
+print("\n--- ÜLESANNE 4: MAA JA 2-EUROSED MÜNDID ---")
+
+maa_raadius_km = 6378
+mundi_labimoot_mm = 25.75
+pi = 3.141592653589793
+
+maa_umbermoot_km = 2 * pi * maa_raadius_km
+maa_umbermoot_mm = maa_umbermoot_km * 1000000
+muntide_arv = maa_umbermoot_mm / mundi_labimoot_mm
+
+print("Maa ümbermõõt:", round(maa_umbermoot_km, 2), "km")
+print("Vajalike 2-euroste müntide arv:", math.ceil(muntide_arv))
+
+
+# ==========================================
+# ÜLESANNE 5 – KILL-KOLL
+# ==========================================
+
+print("\n--- ÜLESANNE 5: KILL-KOLL ---")
+
+sona1 = "KILL-KOLL"
+sona2 = "KILLADI-KOLL"
+
+print(sona1, sona1, sona2, sona1, sona1, sona2,
+      sona1, sona1, sona1)
+print(sona1)
+
+
+# ==========================================
+# ÜLESANNE 6 – LAULUSÕNAD SUURTÄHTEDEGA
+# ==========================================
+
+print("\n--- ÜLESANNE 6: RONGILAUL ---")
+
+print("""RONG SEE SÕITIS TSUHH TSUHH TSUHH,
+PIILUPART OLI RONGIJUHT.
+RATTAD TEGID RAT TAT TAA,
+RAT TAT TAA JA TAT TAT TAA.
+AGA SEAL RONGI PEAL,
+KAS SA TEAD, KES OLID SEAL?
+
+RONG SEE SÕITIS TUUT TUUT TUUT,
+PIILUPART OLI RONGIJUHT.
+RATTAD TEGID KILL KOLL KOLL,
+KILL KOLL KOLL JA KILL KOLL KILL.""")
+
+
+# ==========================================
+# ÜLESANNE 7 – RISTKÜLIK
+# ==========================================
+
+print("\n--- ÜLESANNE 7: RISTKÜLIK ---")
+
+try:
+    a = float(input("Sisesta ristküliku esimene külg: "))
+    b = float(input("Sisesta ristküliku teine külg: "))
+
+    if a > 0 and b > 0:
+        umbermoot = 2 * (a + b)
+        pindala = a * b
+
+        print("Ristküliku ümbermõõt:", umbermoot)
+        print("Ristküliku pindala:", pindala)
+    else:
+        print("Külgede pikkused peavad olema positiivsed.")
+
+except ValueError:
+    print("Palun sisesta arvud.")
+
+
+# ==========================================
+# ÜLESANNE 8 – KÜTUSEKULU
+# ==========================================
+
+print("\n--- ÜLESANNE 8: KÜTUSEKULU ---")
+
+try:
+    liitrid = float(input("Mitu liitrit kütust tangiti? "))
+    kilomeetrid = float(input("Mitu kilomeetrit läbiti? "))
+
+    if liitrid >= 0 and kilomeetrid > 0:
+        kulu = liitrid / kilomeetrid * 100
+        print("Keskmine kütusekulu:", round(kulu, 2), "l/100 km")
+    else:
+        print("Liitrid ei tohi olla negatiivsed ja kilomeetrid peavad olema üle 0.")
+
+except ValueError:
+    print("Palun sisesta arvud.")
+
+
+# ==========================================
+# ÜLESANNE 9 – RULLUISUTAJAD
+# ==========================================
+
+print("\n--- ÜLESANNE 9: RULLUISUTAJAD ---")
+
+kiirus = 29.9
+
+try:
+    minutid = float(input("Mitu minutit rulluisutaja sõidab? "))
+
+    if minutid >= 0:
+        kaugus = kiirus * minutid / 60
+        print("Läbitud vahemaa:", round(kaugus, 2), "km")
+    else:
+        print("Minutite arv ei saa olla negatiivne.")
+
+except ValueError:
+    print("Palun sisesta arv.")
+
+
+# ==========================================
+# ÜLESANNE 10 – AJATEISENDUS
+# ==========================================
+
+print("\n--- ÜLESANNE 10: AJATEISENDUS ---")
+
+try:
+    minutid = int(input("Sisesta aeg minutites: "))
+
+    if minutid >= 0:
+        tunnid = minutid // 60
+        jaak = minutid % 60
+
+        print(f"Aeg tundides ja minutites: {tunnid}:{jaak:02d}")
+    else:
+        print("Minutite arv ei saa olla negatiivne.")
+
+except ValueError:
+    print("Palun sisesta täisarv.")
+
+
+print("\nKõik 10 ülesannet on läbitud!")
